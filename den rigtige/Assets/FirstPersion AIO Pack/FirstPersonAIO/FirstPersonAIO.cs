@@ -5,6 +5,13 @@
 ///
 /// DATE || msg: "" || Author Signature: SNG || version VERSION
 ///
+<<<<<<< HEAD
+=======
+/// 04/11/20 || msg: "Fixed controller slowly slipping down inclines." || Author: Aedan Graves || version 20.4.4qf >> 20.4.11qf
+/// 04/04/20 || msg: "Fixed wall detection issues. Mouse Input Optimizations." || Author: Aedan Graves || version 20.3.26 >> 20.4.4qf
+/// 26/03/20 || msg: "Fixed Stamina meter not draining. Fixed inconsistent jumping in Unity 2019.3+. Fixed Terrain not registering as ground. Added new Ground detection system using the capsule collider. Added RotateCamera Function" || Author Signature: Aedan Graves || version 20.3.8qf >> 20.3.26
+/// 08/03/20 || msg: "Fixed draw stamina meter toggle throwing an error and disabling movement" || Author Signature: Aedan Graves || version 20.2.28cfu >> 20.3.8qf
+>>>>>>> 91edd16ebde2162c2a8b8f38e2d8f140e69946f3
 /// 28/02/20 || msg: "ADDITIONS: 1) Added Mouse Inversion Options 2) Added Stair Detection (Experimental) UPDATES: 1) Removed InfiniGun compatibility features. 2) Converted Jump/Land movements to be intensity based. 3) Audio arrays now utilize Drag N' Drop. 4) Dynamic foot steps now are able to use more then one physic material as well as use normal materials (Experimental). FIXES 1) Fixed some variables not "Sticking" 2) Fixed phantom "_useFootStepSounds" flip-floping. 3) Fixed Jumping no longer working when scale is changed. 4) Fixed Slope Detection. 5) Fixed Crouch to properly move camera." || Author Signature: Aedan Graves || version: 19.9.21f >> 20.2.28cfu
 /// 17/02/20 || msg: "Fixed input checking being done in FixedUpdate, causing incosistent jumping and crouching." || Author Signature: Samuel Förström || version: 19.9.20f >> 19.9.21f 
 /// 10/17/19 || msg: "Fixed inconsistant jumping/ground detection. Fixed headbobing axis amplification. Added toggle crouching." || Author Signature: Aedan Graves || version: 19.9.20f >> 19.10.17f 
@@ -68,7 +75,10 @@ public class FirstPersonAIO : MonoBehaviour {
     public InvertMouseInput mouseInputInversion = InvertMouseInput.None;
     public float verticalRotationRange = 170;
     public float mouseSensitivity = 10;
+<<<<<<< HEAD
     public float mouseSensitivityInternal;
+=======
+>>>>>>> 91edd16ebde2162c2a8b8f38e2d8f140e69946f3
     public  float   fOVToMouseSensitivity = 1;
     public float cameraSmoothing = 5f;
     public bool lockAndHideCursor = false;
@@ -145,11 +155,18 @@ public class FirstPersonAIO : MonoBehaviour {
     }
     public AdvancedSettings advanced = new AdvancedSettings();
     private CapsuleCollider capsule;
+<<<<<<< HEAD
     private const float jumpRayLength = 0.7f;
     public bool IsGrounded { get; private set; }
     Vector2 inputXY;
     public bool isCrouching;
     
+=======
+    public bool IsGrounded { get; private set; }
+    Vector2 inputXY;
+    public bool isCrouching;
+    float yVelocity;
+>>>>>>> 91edd16ebde2162c2a8b8f38e2d8f140e69946f3
     bool isSprinting = false;
 
     public Rigidbody fps_Rigidbody;
@@ -305,7 +322,10 @@ public class BETA_SETTINGS{
                 StaminaMeter.color = new Color(0,0,0,0);
             }
         }
+<<<<<<< HEAD
         mouseSensitivityInternal = mouseSensitivity;
+=======
+>>>>>>> 91edd16ebde2162c2a8b8f38e2d8f140e69946f3
         cameraStartingPosition = playerCamera.transform.localPosition;
         if(lockAndHideCursor) { Cursor.lockState = CursorLockMode.Locked; Cursor.visible = false; }
         baseCamFOV = playerCamera.fieldOfView;
@@ -351,9 +371,15 @@ public class BETA_SETTINGS{
             mouseXInput = mouseInputInversion == InvertMouseInput.None || mouseInputInversion == InvertMouseInput.Y ? Input.GetAxis("Mouse X") : -Input.GetAxis("Mouse X");
             if(targetAngles.y > 180) { targetAngles.y -= 360; followAngles.y -= 360; } else if(targetAngles.y < -180) { targetAngles.y += 360; followAngles.y += 360; }
             if(targetAngles.x > 180) { targetAngles.x -= 360; followAngles.x -= 360; } else if(targetAngles.x < -180) { targetAngles.x += 360; followAngles.x += 360; }
+<<<<<<< HEAD
             targetAngles.y += mouseXInput * (mouseSensitivityInternal - ((baseCamFOV-camFOV)*fOVToMouseSensitivity)/6f);
             targetAngles.x += mouseYInput * (mouseSensitivityInternal - ((baseCamFOV-camFOV)*fOVToMouseSensitivity)/6f);
             targetAngles.y = Mathf.Clamp(targetAngles.y, -0.5f * Mathf.Infinity, 0.5f * Mathf.Infinity);
+=======
+            targetAngles.y += mouseXInput * (mouseSensitivity - ((baseCamFOV-camFOV)*fOVToMouseSensitivity)/6f);
+            targetAngles.x += mouseYInput * (mouseSensitivity - ((baseCamFOV-camFOV)*fOVToMouseSensitivity)/6f);
+            //targetAngles.y = Mathf.Clamp(targetAngles.y, -0.5f * Mathf.Infinity, 0.5 * Mathf.Infinity);
+>>>>>>> 91edd16ebde2162c2a8b8f38e2d8f140e69946f3
             targetAngles.x = Mathf.Clamp(targetAngles.x, -0.5f * verticalRotationRange, 0.5f * verticalRotationRange);
             followAngles = Vector3.SmoothDamp(followAngles, targetAngles, ref followVelocity, (cameraSmoothing)/100);
             playerCamera.transform.localRotation = Quaternion.Euler(-followAngles.x + originalRotation.x,0,0);
@@ -363,7 +389,21 @@ public class BETA_SETTINGS{
         #endregion
 
         #region  Input Settings - Update
+<<<<<<< HEAD
         didJump = canHoldJump?Input.GetButton("Jump"): Input.GetButtonDown("Jump");
+=======
+        didJump = canHoldJump? Input.GetButton("Jump"): Input.GetButtonDown("Jump");
+        if (!canJump){didJump = false;}
+        yVelocity = fps_Rigidbody.velocity.y;
+        if(IsGrounded && didJump && jumpPowerInternal > 0){
+            yVelocity += jumpPowerInternal;
+            IsGrounded = false;
+            didJump=false;
+            if(playerCanMove){fps_Rigidbody.velocity = (Vector3.up * yVelocity);}
+        }
+            if(advanced._maxSlopeAngle>0 && IsGrounded && SlopeCheck()<=0.25f){yVelocity *= SlopeCheck();}
+        //if(){didJump = false;}
+>>>>>>> 91edd16ebde2162c2a8b8f38e2d8f140e69946f3
 
         if(_crouchModifiers.useCrouch){
             if(!_crouchModifiers.toggleCrouch){ isCrouching = _crouchModifiers.crouchOverride || Input.GetKey(_crouchModifiers.crouchKey);}
@@ -404,6 +444,7 @@ public class BETA_SETTINGS{
             }else if((!Input.GetKey(sprintKey)||Mathf.Abs(fps_Rigidbody.velocity.x)< 0.01f || Mathf.Abs(fps_Rigidbody.velocity.x)< 0.01f || isCrouching)&&staminaInternal<staminaLevel){
                 staminaInternal += staminaDepletionSpeed*Time.deltaTime;
             }
+<<<<<<< HEAD
                 if(drawStaminaMeter&&staminaInternal==staminaLevel){
                     StaminaMeterBG.color = Vector4.MoveTowards(StaminaMeterBG.color, new Vector4(0,0,0,0),0.15f);
                     StaminaMeter.color = Vector4.MoveTowards(StaminaMeter.color, new Vector4(1,1,1,0),0.15f);
@@ -411,10 +452,20 @@ public class BETA_SETTINGS{
                 staminaInternal = Mathf.Clamp(staminaInternal,0,staminaLevel);
                 float x = Mathf.Clamp(Mathf.SmoothDamp(StaminaMeter.transform.localScale.x,(staminaInternal/staminaLevel)*StaminaMeterBG.transform.localScale.x,ref smoothRef,(1)*Time.deltaTime,1),0.001f, StaminaMeterBG.transform.localScale.x);
                 StaminaMeter.transform.localScale = new Vector3(x,1,1); 
+=======
+                if(drawStaminaMeter){
+                   if(staminaInternal==staminaLevel){ StaminaMeterBG.color = Vector4.MoveTowards(StaminaMeterBG.color, new Vector4(0,0,0,0),0.15f);
+                    StaminaMeter.color = Vector4.MoveTowards(StaminaMeter.color, new Vector4(1,1,1,0),0.15f);}
+                    float x = Mathf.Clamp(Mathf.SmoothDamp(StaminaMeter.transform.localScale.x,(staminaInternal/staminaLevel)*StaminaMeterBG.transform.localScale.x,ref smoothRef,(1)*Time.deltaTime,1),0.001f, StaminaMeterBG.transform.localScale.x);
+                    StaminaMeter.transform.localScale = new Vector3(x,1,1); 
+                }
+                staminaInternal = Mathf.Clamp(staminaInternal,0,staminaLevel);
+>>>>>>> 91edd16ebde2162c2a8b8f38e2d8f140e69946f3
         } else{isSprinting = Input.GetKey(sprintKey);}
 
         Vector3 dMove = Vector3.zero;
         speed = walkByDefault ? isCrouching ? walkSpeedInternal : (isSprinting ? sprintSpeedInternal : walkSpeedInternal) : (isSprinting ? walkSpeedInternal : sprintSpeedInternal);
+<<<<<<< HEAD
         if(IsGrounded || fps_Rigidbody.velocity.y < 0.1) {
             RaycastHit[] hits = Physics.SphereCastAll(transform.position - new Vector3(0,((capsule.height/2)*transform.localScale.y)-0.01f,0), capsule.radius,Vector3.down,0,Physics.AllLayers,QueryTriggerInteraction.Ignore);
             float nearest = float.PositiveInfinity;
@@ -443,17 +494,35 @@ public class BETA_SETTINGS{
         
 
         if(IsGrounded && advanced.maxStepHeight > 0 && Physics.Raycast(transform.position - new Vector3(0,((capsule.height/2)*transform.localScale.y)-0.01f,0),dMove,out WT,capsule.radius+0.15f) && Vector3.Angle(WT.normal, Vector3.up)>88){
+=======
+  
+
+        if(advanced._maxSlopeAngle>0 && Physics.Raycast(transform.position - new Vector3(0,((capsule.height/2)*transform.localScale.y)-capsule.radius,0),new Vector3(dMove.x,-1.5f,dMove.z),out advanced.surfaceAngleCheck,capsule.radius*4)){
+            dMove = ((transform.forward * inputXY.y * speed + transform.right * inputXY.x * walkSpeedInternal) * SlopeCheck())+ Vector3.up*fps_Rigidbody.velocity.y;
+        }
+        else{
+        dMove = (transform.forward * inputXY.y * speed + transform.right * inputXY.x * walkSpeedInternal) + Vector3.up*fps_Rigidbody.velocity.y;
+        }
+        
+        RaycastHit WT;
+        if(advanced.maxStepHeight > 0 && Physics.Raycast(transform.position - new Vector3(0,((capsule.height/2)*transform.localScale.y)-0.01f,0),dMove,out WT,capsule.radius+0.15f) && Vector3.Angle(WT.normal, Vector3.up)>88){
+>>>>>>> 91edd16ebde2162c2a8b8f38e2d8f140e69946f3
             RaycastHit ST;
             if(!Physics.Raycast(transform.position - new Vector3(0,((capsule.height/2)*transform.localScale.y)-(advanced.maxStepHeight),0),dMove,out ST,capsule.radius+0.25f)){
                 advanced.stairMiniHop = true;
                 transform.position += new Vector3(0,advanced.maxStepHeight*1.2f,0);
             }
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 91edd16ebde2162c2a8b8f38e2d8f140e69946f3
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
         inputXY = new Vector2(horizontalInput, verticalInput);
         if(inputXY.magnitude > 1) { inputXY.Normalize(); }
        
+<<<<<<< HEAD
         float yv = fps_Rigidbody.velocity.y;
 
         if (!canJump) didJump = false;
@@ -471,6 +540,15 @@ public class BETA_SETTINGS{
         } else{fps_Rigidbody.velocity = Vector3.zero;}
 
         if(dMove.magnitude > 0 || !IsGrounded) {
+=======
+
+        if(playerCanMove)
+        {
+            fps_Rigidbody.velocity = dMove;
+        } else{fps_Rigidbody.velocity = Vector3.zero;}
+
+        if(inputXY.magnitude > 0 || !IsGrounded) {
+>>>>>>> 91edd16ebde2162c2a8b8f38e2d8f140e69946f3
             capsule.sharedMaterial = advanced.zeroFrictionMaterial;
         } else { capsule.sharedMaterial = advanced.highFrictionMaterial; }
 
@@ -510,7 +588,10 @@ public class BETA_SETTINGS{
         float bobFactor = 0;
         float strideLangthen = 0;
         float flatVel = 0;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 91edd16ebde2162c2a8b8f38e2d8f140e69946f3
         //calculate headbob freq
         if(useHeadbob == true || fsmode == FSMode.Dynamic){
             Vector3 vel = (fps_Rigidbody.position - previousPosition) / Time.deltaTime;
@@ -711,6 +792,27 @@ public class BETA_SETTINGS{
             advanced.lastKnownSlopeAngle =  (Vector3.Angle(advanced.surfaceAngleCheck.normal, Vector3.up));
             return new AnimationCurve(new Keyframe(-90.0f, 1.0f), new Keyframe(0.0f, 1.0f), new Keyframe(advanced._maxSlopeAngle, 0.0f),new Keyframe(90, 0.0f)){preWrapMode = WrapMode.Clamp, postWrapMode = WrapMode.ClampForever}.Evaluate(advanced.lastKnownSlopeAngle);
     }
+<<<<<<< HEAD
+=======
+
+    public void RotateCamera(Vector2 Rotation){
+        enableCameraMovement = !enableCameraMovement;
+        targetAngles = Rotation;
+        enableCameraMovement = !enableCameraMovement;
+    }
+
+    private void OnCollisionStay(Collision CollisionData) {
+        if(IsGrounded || fps_Rigidbody.velocity.y < 0.1){
+            IsGrounded = false;
+            for(int i = 0; i<CollisionData.contactCount; i++){
+                if(CollisionData.GetContact(i).point.y < (transform.position.y - (capsule.radius+0.199f))){
+                    IsGrounded = true;
+                    advanced.stairMiniHop = false;
+                }
+            }
+        }
+    }
+>>>>>>> 91edd16ebde2162c2a8b8f38e2d8f140e69946f3
 }
 
 #if UNITY_EDITOR
@@ -759,7 +861,11 @@ public class BETA_SETTINGS{
         SerializedProperty customMat;
         SerializedProperty customPhysMat;
 
+<<<<<<< HEAD
         string versionNum = "20.2.28cfu";
+=======
+        string versionNum = "20.4.11qf";
+>>>>>>> 91edd16ebde2162c2a8b8f38e2d8f140e69946f3
         void OnEnable(){
             t = (FirstPersonAIO)target;
             SerT = new SerializedObject(t);
@@ -811,7 +917,11 @@ public class BETA_SETTINGS{
             GUI.enabled = t.enableCameraMovement;
             t.verticalRotationRange = EditorGUILayout.Slider(new GUIContent("Vertical Rotation Range","Determines how much range does the camera have to move vertically."),t.verticalRotationRange,90,180);
             t.mouseInputInversion = (FirstPersonAIO.InvertMouseInput)EditorGUILayout.EnumPopup(new GUIContent("Mouse Input Inversion","Determines if mouse input should be inverted, and along which axes"),t.mouseInputInversion);
+<<<<<<< HEAD
             t.mouseSensitivityInternal = t.mouseSensitivity = EditorGUILayout.Slider(new GUIContent("Mouse Sensitivity","Determines how sensitive the mouse is."),t.mouseSensitivity, 1,15);
+=======
+            t.mouseSensitivity = EditorGUILayout.Slider(new GUIContent("Mouse Sensitivity","Determines how sensitive the mouse is."),t.mouseSensitivity, 1,15);
+>>>>>>> 91edd16ebde2162c2a8b8f38e2d8f140e69946f3
             //t.mouseSensitivity = EditorGUILayout.Slider(new GUIContent("Mouse Sensitivity","Determines how sensitive the mouse is."),t.mouseSensitivity, 1,15);
             t.fOVToMouseSensitivity = EditorGUILayout.Slider(new GUIContent("FOV to Mouse Sensitivity","Determines how much the camera's Field Of View will effect the mouse sensitivity. \n\n0 = no effect, 1 = full effect on sensitivity."),t.fOVToMouseSensitivity,0,1);
             t.cameraSmoothing = EditorGUILayout.Slider(new GUIContent("Camera Smoothing","Determines how smooth the camera movement is."),t.cameraSmoothing,1,25);
@@ -843,7 +953,11 @@ public class BETA_SETTINGS{
             EditorGUI.indentLevel --;GUI.enabled = t.playerCanMove;
             EditorGUILayout.Space();
             EditorGUILayout.Space();
+<<<<<<< HEAD
             showCrouchMods = EditorGUILayout.Foldout(showCrouchMods,new GUIContent("Crouch Modifiers","Stat modifiers that will apply when player is crouching."));
+=======
+            showCrouchMods = EditorGUILayout.BeginFoldoutHeaderGroup(showCrouchMods,new GUIContent("Crouch Modifiers","Stat modifiers that will apply when player is crouching."));
+>>>>>>> 91edd16ebde2162c2a8b8f38e2d8f140e69946f3
             if(showCrouchMods){
                 t._crouchModifiers.useCrouch = EditorGUILayout.ToggleLeft(new GUIContent("Enable Coruch","Determines if the player is allowed to crouch."),t._crouchModifiers.useCrouch);
                 GUI.enabled = t.playerCanMove && t._crouchModifiers.useCrouch;
@@ -854,9 +968,15 @@ public class BETA_SETTINGS{
                 t._crouchModifiers.crouchOverride = EditorGUILayout.ToggleLeft(new GUIContent("Force Crouch Override","A Toggle that will override the crouch key to force player to crouch."),t._crouchModifiers.crouchOverride);
             }
             GUI.enabled = t.playerCanMove;
+<<<<<<< HEAD
                   
             EditorGUILayout.Space();
             showFOVKickSet = EditorGUILayout.Foldout(showFOVKickSet, new GUIContent("FOV Kick Settings","Settings for FOV Kick"));
+=======
+            EditorGUILayout.EndFoldoutHeaderGroup();      
+            EditorGUILayout.Space();
+            showFOVKickSet = EditorGUILayout.BeginFoldoutHeaderGroup(showFOVKickSet, new GUIContent("FOV Kick Settings","Settings for FOV Kick"));
+>>>>>>> 91edd16ebde2162c2a8b8f38e2d8f140e69946f3
             if(showFOVKickSet){
                 GUILayout.Label("Under Development",new GUIStyle(GUI.skin.label){alignment = TextAnchor.MiddleCenter,fontStyle = FontStyle.Bold, fontSize = 13},GUILayout.ExpandWidth(true));
                 GUI.enabled = false;
@@ -867,8 +987,14 @@ public class BETA_SETTINGS{
                 t.fOVKick.KickCurve = EditorGUILayout.CurveField(new GUIContent("Kick Curve",""),t.fOVKick.KickCurve);
             }
             GUI.enabled =t.playerCanMove;
+<<<<<<< HEAD
             EditorGUILayout.Space();
             showAdvanced = EditorGUILayout.Foldout(showAdvanced,new GUIContent("Advanced Movement","Advanced movenet settings"));
+=======
+            EditorGUILayout.EndFoldoutHeaderGroup();
+            EditorGUILayout.Space();
+            showAdvanced = EditorGUILayout.BeginFoldoutHeaderGroup(showAdvanced,new GUIContent("Advanced Movement","Advanced movenet settings"));
+>>>>>>> 91edd16ebde2162c2a8b8f38e2d8f140e69946f3
             if(showAdvanced){
                 t.useStamina = EditorGUILayout.ToggleLeft(new GUIContent("Enable Stamina","Determines if spriting will be limited by stamina."),t.useStamina);
                 GUI.enabled = t.playerCanMove && t.useStamina; EditorGUI.indentLevel++;
@@ -881,7 +1007,11 @@ public class BETA_SETTINGS{
                 t.advanced._maxSlopeAngle = EditorGUILayout.Slider(new GUIContent("Max Slope Angle","Determines the maximum angle the player can walk up. If left 0, the slope detection/limiting system will not be used."),t.advanced._maxSlopeAngle,0,70);
                 t.advanced.maxStepHeight = EditorGUILayout.Slider(new GUIContent("Max Step Height","EXPERIMENTAL! Determines if a small ledge is a stair by comparing it to this value. Values over 0.5 produces     odd results."),t.advanced.maxStepHeight,0,1);
             }
+<<<<<<< HEAD
             
+=======
+            EditorGUILayout.EndFoldoutHeaderGroup();
+>>>>>>> 91edd16ebde2162c2a8b8f38e2d8f140e69946f3
             GUI.enabled = true;
             EditorGUILayout.Space();
         #endregion
@@ -919,7 +1049,11 @@ public class BETA_SETTINGS{
 
             #region FS Static
             if(t.fsmode == FirstPersonAIO.FSMode.Static){
+<<<<<<< HEAD
                 showStaticFS = EditorGUILayout.Foldout(showStaticFS,new GUIContent("Footstep Clips","Audio clips available as footstep sounds."));
+=======
+                showStaticFS = EditorGUILayout.BeginFoldoutHeaderGroup(showStaticFS,new GUIContent("Footstep Clips","Audio clips available as footstep sounds."));
+>>>>>>> 91edd16ebde2162c2a8b8f38e2d8f140e69946f3
                 if(showStaticFS){
                     GUILayout.BeginVertical("box");
                     for(int i=0; i<staticFS.arraySize; i++){
@@ -939,7 +1073,11 @@ public class BETA_SETTINGS{
                     GUILayout.EndVertical();
                     DropAreaGUI(t.footStepSounds,GUILayoutUtility.GetLastRect());
                 } 
+<<<<<<< HEAD
                 
+=======
+                EditorGUILayout.EndFoldoutHeaderGroup();
+>>>>>>> 91edd16ebde2162c2a8b8f38e2d8f140e69946f3
                 t.jumpSound = (AudioClip)EditorGUILayout.ObjectField(new GUIContent("Jump Clip","An audio clip that will play when jumping."),t.jumpSound,typeof(AudioClip),false);
                 t.landSound = (AudioClip)EditorGUILayout.ObjectField(new GUIContent("Land Clip","An audio clip that will play when landing."),t.landSound,typeof(AudioClip),false);
 
@@ -950,7 +1088,11 @@ public class BETA_SETTINGS{
                 t.dynamicFootstep.materialMode = (FirstPersonAIO.DynamicFootStep.matMode)EditorGUILayout.EnumPopup(new GUIContent("Material Type", "Determines the type of material will trigger footstep audio."),t.dynamicFootstep.materialMode);
                 EditorGUILayout.Space();
                 #region Wood Section
+<<<<<<< HEAD
                 showWoodFS = EditorGUILayout.Foldout(showWoodFS,new GUIContent("Wood Clips","Audio clips available as footsteps when walking on a collider with the Physic Material assigned to 'Wood Physic Material'"));
+=======
+                showWoodFS = EditorGUILayout.BeginFoldoutHeaderGroup(showWoodFS,new GUIContent("Wood Clips","Audio clips available as footsteps when walking on a collider with the Physic Material assigned to 'Wood Physic Material'"));
+>>>>>>> 91edd16ebde2162c2a8b8f38e2d8f140e69946f3
                 if(showWoodFS){
                     GUILayout.BeginVertical("box");
                     if(t.dynamicFootstep.materialMode == FirstPersonAIO.DynamicFootStep.matMode.physicMaterial){
@@ -1001,11 +1143,19 @@ public class BETA_SETTINGS{
                     DropAreaGUI(t.dynamicFootstep.woodClipSet,GUILayoutUtility.GetLastRect());
                 } 
                 GUI.enabled = true;
+<<<<<<< HEAD
                 
                 EditorGUILayout.Space();
                 #endregion 
                 #region Metal Section
                 showMetalFS = EditorGUILayout.Foldout(showMetalFS,new GUIContent("Metal & Glass Clips","Audio clips available as footsteps when walking on a collider with the Physic Material assigned to 'Metal & Glass Physic Material'"));
+=======
+                EditorGUILayout.EndFoldoutHeaderGroup();
+                EditorGUILayout.Space();
+                #endregion 
+                #region Metal Section
+                showMetalFS = EditorGUILayout.BeginFoldoutHeaderGroup(showMetalFS,new GUIContent("Metal & Glass Clips","Audio clips available as footsteps when walking on a collider with the Physic Material assigned to 'Metal & Glass Physic Material'"));
+>>>>>>> 91edd16ebde2162c2a8b8f38e2d8f140e69946f3
                 if(showMetalFS){
                     GUILayout.BeginVertical("box");
                     
@@ -1057,11 +1207,19 @@ public class BETA_SETTINGS{
                     DropAreaGUI(t.dynamicFootstep.metalAndGlassClipSet,GUILayoutUtility.GetLastRect());
                 } 
                 GUI.enabled = true;
+<<<<<<< HEAD
                 
                 EditorGUILayout.Space();
                 #endregion
                 #region Grass Section
                 showGrassFS = EditorGUILayout.Foldout(showGrassFS,new GUIContent("Grass Clips","Audio clips available as footsteps when walking on a collider with the Physic Material assigned to 'Grass Physic Material'"));
+=======
+                EditorGUILayout.EndFoldoutHeaderGroup();
+                EditorGUILayout.Space();
+                #endregion
+                #region Grass Section
+                showGrassFS = EditorGUILayout.BeginFoldoutHeaderGroup(showGrassFS,new GUIContent("Grass Clips","Audio clips available as footsteps when walking on a collider with the Physic Material assigned to 'Grass Physic Material'"));
+>>>>>>> 91edd16ebde2162c2a8b8f38e2d8f140e69946f3
                 if(showGrassFS){
                     GUILayout.BeginVertical("box");
 
@@ -1113,11 +1271,19 @@ public class BETA_SETTINGS{
                     DropAreaGUI(t.dynamicFootstep.grassClipSet,GUILayoutUtility.GetLastRect());
                 } 
                 GUI.enabled = true;
+<<<<<<< HEAD
                 
                 EditorGUILayout.Space();
                 #endregion
                 #region Dirt Section
                 showDirtFS = EditorGUILayout.Foldout(showDirtFS,new GUIContent("Dirt & Gravel Clips","Audio clips available as footsteps when walking on a collider with the Physic Material assigned to 'Dirt & Gravel Physic Material'"));
+=======
+                EditorGUILayout.EndFoldoutHeaderGroup();
+                EditorGUILayout.Space();
+                #endregion
+                #region Dirt Section
+                showDirtFS = EditorGUILayout.BeginFoldoutHeaderGroup(showDirtFS,new GUIContent("Dirt & Gravel Clips","Audio clips available as footsteps when walking on a collider with the Physic Material assigned to 'Dirt & Gravel Physic Material'"));
+>>>>>>> 91edd16ebde2162c2a8b8f38e2d8f140e69946f3
                 if(showDirtFS){
                     GUILayout.BeginVertical("box");
 
@@ -1169,11 +1335,19 @@ public class BETA_SETTINGS{
                     DropAreaGUI(t.dynamicFootstep.dirtAndGravelClipSet,GUILayoutUtility.GetLastRect());
                 } 
                 GUI.enabled = true;
+<<<<<<< HEAD
                 
                 EditorGUILayout.Space();
                 #endregion
                 #region Rock Section
                 showConcreteFS = EditorGUILayout.Foldout(showConcreteFS,new GUIContent("Rock & Concrete Clips","Audio clips available as footsteps when walking on a collider with the Physic Material assigned to 'Rock & Concrete Physic Material'"));
+=======
+                EditorGUILayout.EndFoldoutHeaderGroup();
+                EditorGUILayout.Space();
+                #endregion
+                #region Rock Section
+                showConcreteFS = EditorGUILayout.BeginFoldoutHeaderGroup(showConcreteFS,new GUIContent("Rock & Concrete Clips","Audio clips available as footsteps when walking on a collider with the Physic Material assigned to 'Rock & Concrete Physic Material'"));
+>>>>>>> 91edd16ebde2162c2a8b8f38e2d8f140e69946f3
                 if(showConcreteFS){
                     GUILayout.BeginVertical("box");
 
@@ -1225,11 +1399,19 @@ public class BETA_SETTINGS{
                     DropAreaGUI(t.dynamicFootstep.rockAndConcreteClipSet,GUILayoutUtility.GetLastRect());
                 } 
                 GUI.enabled = true;
+<<<<<<< HEAD
                 
                 EditorGUILayout.Space();
                 #endregion
                 #region Mud Section
                 showMudFS = EditorGUILayout.Foldout(showMudFS,new GUIContent("Mud Clips","Audio clips available as footsteps when walking on a collider with the Physic Material assigned to 'Mud Physic Material'"));
+=======
+                EditorGUILayout.EndFoldoutHeaderGroup();
+                EditorGUILayout.Space();
+                #endregion
+                #region Mud Section
+                showMudFS = EditorGUILayout.BeginFoldoutHeaderGroup(showMudFS,new GUIContent("Mud Clips","Audio clips available as footsteps when walking on a collider with the Physic Material assigned to 'Mud Physic Material'"));
+>>>>>>> 91edd16ebde2162c2a8b8f38e2d8f140e69946f3
                 if(showMudFS){
                     GUILayout.BeginVertical("box");
                     
@@ -1281,11 +1463,19 @@ public class BETA_SETTINGS{
                     DropAreaGUI(t.dynamicFootstep.mudClipSet,GUILayoutUtility.GetLastRect());
                 } 
                 GUI.enabled = true;
+<<<<<<< HEAD
                 
                 EditorGUILayout.Space();
                 #endregion
                 #region Custom Section
                 showCustomFS = EditorGUILayout.Foldout(showCustomFS,new GUIContent("Custom Material Clips","Audio clips available as footsteps when walking on a collider with the Physic Material assigned to 'Custom Physic Material'"));
+=======
+                EditorGUILayout.EndFoldoutHeaderGroup();
+                EditorGUILayout.Space();
+                #endregion
+                #region Custom Section
+                showCustomFS = EditorGUILayout.BeginFoldoutHeaderGroup(showCustomFS,new GUIContent("Custom Material Clips","Audio clips available as footsteps when walking on a collider with the Physic Material assigned to 'Custom Physic Material'"));
+>>>>>>> 91edd16ebde2162c2a8b8f38e2d8f140e69946f3
                 if(showCustomFS){
                     GUILayout.BeginVertical("box");
 
@@ -1337,11 +1527,19 @@ public class BETA_SETTINGS{
                     DropAreaGUI(t.dynamicFootstep.customClipSet,GUILayoutUtility.GetLastRect());
                 }
                 GUI.enabled = true;
+<<<<<<< HEAD
                 
                 EditorGUILayout.Space();
                 #endregion
                 #region Fallback Section
                 showStaticFS = EditorGUILayout.Foldout(showStaticFS,new GUIContent("Fallback Footstep Clips","Audio clips available as footsteps in case a collider with an unrecognized/null Physic Material is walked on."));
+=======
+                EditorGUILayout.EndFoldoutHeaderGroup();
+                EditorGUILayout.Space();
+                #endregion
+                #region Fallback Section
+                showStaticFS = EditorGUILayout.BeginFoldoutHeaderGroup(showStaticFS,new GUIContent("Fallback Footstep Clips","Audio clips available as footsteps in case a collider with an unrecognized/null Physic Material is walked on."));
+>>>>>>> 91edd16ebde2162c2a8b8f38e2d8f140e69946f3
                 if(showStaticFS){
                     GUILayout.BeginVertical("box");
                     for(int i=0; i<staticFS.arraySize; i++){
@@ -1361,7 +1559,11 @@ public class BETA_SETTINGS{
                     GUILayout.EndVertical();
                     DropAreaGUI(t.footStepSounds,GUILayoutUtility.GetLastRect());
                 } 
+<<<<<<< HEAD
                 
+=======
+                EditorGUILayout.EndFoldoutHeaderGroup();
+>>>>>>> 91edd16ebde2162c2a8b8f38e2d8f140e69946f3
                 #endregion
             }
         #endregion
