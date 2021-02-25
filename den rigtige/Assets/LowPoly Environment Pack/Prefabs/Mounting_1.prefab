@@ -9,19 +9,32 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
+<<<<<<< HEAD:den rigtige/Assets/FirstPersion AIO Pack/DemoScene/Prefabs/Chair.prefab
+  m_RootGameObject: {fileID: 1059619907752036}
+  m_IsPrefabParent: 1
+--- !u!1 &1059619907752036
+=======
   m_RootGameObject: {fileID: 1856861724390114}
   m_IsPrefabParent: 1
 --- !u!1 &1856861724390114
+>>>>>>> c128a0c5e40f25083413347a9d7676a2236c2e82:den rigtige/Assets/LowPoly Environment Pack/Prefabs/Mounting_1.prefab
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
+<<<<<<< HEAD:den rigtige/Assets/FirstPersion AIO Pack/DemoScene/Prefabs/Chair.prefab
+  - component: {fileID: 4634325110710922}
+  - component: {fileID: 33802168842670368}
+  - component: {fileID: 23517323392415570}
+  - component: {fileID: 65119865774889034}
+=======
   - component: {fileID: 4619486662236612}
   - component: {fileID: 33806761894796746}
   - component: {fileID: 23323909495853514}
   - component: {fileID: 64710742962647108}
+>>>>>>> c128a0c5e40f25083413347a9d7676a2236c2e82:den rigtige/Assets/LowPoly Environment Pack/Prefabs/Mounting_1.prefab
   m_Layer: 0
   m_Name: Mounting_1
   m_TagString: Untagged
@@ -29,11 +42,26 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+<<<<<<< HEAD:den rigtige/Assets/FirstPersion AIO Pack/DemoScene/Prefabs/Chair.prefab
+--- !u!4 &4634325110710922
+=======
 --- !u!4 &4619486662236612
+>>>>>>> c128a0c5e40f25083413347a9d7676a2236c2e82:den rigtige/Assets/LowPoly Environment Pack/Prefabs/Mounting_1.prefab
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
+<<<<<<< HEAD:den rigtige/Assets/FirstPersion AIO Pack/DemoScene/Prefabs/Chair.prefab
+  m_GameObject: {fileID: 1059619907752036}
+  m_LocalRotation: {x: 0.00000008940696, y: -0.00000032782552, z: 0.11213438, w: 0.9936931}
+  m_LocalPosition: {x: 0, y: -1.972, z: 0.805}
+  m_LocalScale: {x: 0.85, y: 0.85, z: 0.85}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 12.877001}
+--- !u!23 &23517323392415570
+=======
   m_GameObject: {fileID: 1856861724390114}
   m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
@@ -43,11 +71,16 @@ Transform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &23323909495853514
+>>>>>>> c128a0c5e40f25083413347a9d7676a2236c2e82:den rigtige/Assets/LowPoly Environment Pack/Prefabs/Mounting_1.prefab
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
+<<<<<<< HEAD:den rigtige/Assets/FirstPersion AIO Pack/DemoScene/Prefabs/Chair.prefab
+  m_GameObject: {fileID: 1059619907752036}
+=======
   m_GameObject: {fileID: 1856861724390114}
+>>>>>>> c128a0c5e40f25083413347a9d7676a2236c2e82:den rigtige/Assets/LowPoly Environment Pack/Prefabs/Mounting_1.prefab
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -74,11 +107,25 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+<<<<<<< HEAD:den rigtige/Assets/FirstPersion AIO Pack/DemoScene/Prefabs/Chair.prefab
+--- !u!33 &33802168842670368
+=======
 --- !u!33 &33806761894796746
+>>>>>>> c128a0c5e40f25083413347a9d7676a2236c2e82:den rigtige/Assets/LowPoly Environment Pack/Prefabs/Mounting_1.prefab
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
+<<<<<<< HEAD:den rigtige/Assets/FirstPersion AIO Pack/DemoScene/Prefabs/Chair.prefab
+  m_GameObject: {fileID: 1059619907752036}
+  m_Mesh: {fileID: 4300002, guid: d13b23452d2513642bbee06d75de3fb0, type: 3}
+--- !u!65 &65119865774889034
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1059619907752036}
+=======
   m_GameObject: {fileID: 1856861724390114}
   m_Mesh: {fileID: 4300000, guid: 7d626b52dc7a9c24e95f55619a456158, type: 3}
 --- !u!64 &64710742962647108
@@ -87,6 +134,7 @@ MeshCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1856861724390114}
+>>>>>>> c128a0c5e40f25083413347a9d7676a2236c2e82:den rigtige/Assets/LowPoly Environment Pack/Prefabs/Mounting_1.prefab
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
