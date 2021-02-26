@@ -18539,6 +18539,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -0.816
       objectReference: {fileID: 0}
+    - target: {fileID: 64820798451078254, guid: 93acc49b5a9f4e84b89aa62e0282a2a3, type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 64820798451078254, guid: 93acc49b5a9f4e84b89aa62e0282a2a3, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 93acc49b5a9f4e84b89aa62e0282a2a3, type: 3}
 --- !u!1001 &433745850
@@ -21697,6 +21705,7 @@ GameObject:
   - component: {fileID: 515932129}
   - component: {fileID: 515932128}
   - component: {fileID: 515932127}
+  - component: {fileID: 515932131}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -21712,7 +21721,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 515932126}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2
@@ -21781,6 +21790,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1465
   m_LocalEulerAnglesHint: {x: 0, y: -32.642, z: 0}
+--- !u!114 &515932131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 515932126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f417b6e1e080ff749b62cc1a505a8d30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneIndex: 6
 --- !u!1001 &517901586
 PrefabInstance:
   m_ObjectHideFlags: 0

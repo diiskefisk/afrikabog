@@ -683,7 +683,8 @@ public class BETA_SETTINGS{
     public IEnumerator CameraShake(float Duration, float Magnitude){
         float elapsed =0;
         while(elapsed<Duration && enableCameraShake){
-            playerCamera.transform.localPosition =Vector3.MoveTowards(playerCamera.transform.localPosition, new Vector3(cameraStartingPosition.x+ Random.Range(-1,1)*Magnitude,cameraStartingPosition.y+Random.Range(-1,1)*Magnitude,cameraStartingPosition.z), Magnitude*2);
+            playerCamera.transform.localPosition =Vector3.MoveTowards(playerCamera.transform.localPosition, new Vector3(cameraStartingPosition.x+ Random.Range(-1,1)*Magnitude,cameraStartingPosition.y+Random.Range(-1,1)
+                *Magnitude,cameraStartingPosition.z), Magnitude*2);
             yield return new WaitForSecondsRealtime(0.001f);
             elapsed += Time.deltaTime;
             yield return null;
@@ -693,7 +694,8 @@ public class BETA_SETTINGS{
 
     float SlopeCheck(){
             advanced.lastKnownSlopeAngle =  (Vector3.Angle(advanced.surfaceAngleCheck.normal, Vector3.up));
-            return new AnimationCurve(new Keyframe(-90.0f, 1.0f), new Keyframe(0.0f, 1.0f), new Keyframe(advanced._maxSlopeAngle, 0.0f),new Keyframe(90, 0.0f)){preWrapMode = WrapMode.Clamp, postWrapMode = WrapMode.ClampForever}.Evaluate(advanced.lastKnownSlopeAngle);
+            return new AnimationCurve(new Keyframe(-90.0f, 1.0f), new Keyframe(0.0f, 1.0f), new Keyframe(advanced._maxSlopeAngle, 0.0f),new Keyframe(90, 0.0f)){preWrapMode = WrapMode.Clamp, postWrapMode = WrapMode.ClampForever}.
+            Evaluate(advanced.lastKnownSlopeAngle);
     }
 
     public void RotateCamera(Vector2 Rotation){
@@ -1374,7 +1376,8 @@ public class BETA_SETTINGS{
             EditorGUILayout.Space();
             EditorGUILayout.BeginVertical("Box");
             GUILayout.Label(new GUIContent("Support Address","Need help? No Problem! We're always happy to help with any issue you may have."),new GUIStyle(GUI.skin.label){alignment = TextAnchor.MiddleCenter},GUILayout.ExpandWidth(true));
-            EditorGUILayout.SelectableLabel(new GUIContent("support@aedangraves.info","Need help? No Problem! We're always happy to help with any issue you may have.").text,new GUIStyle(GUI.skin.label){alignment = TextAnchor.MiddleCenter,fontStyle = FontStyle.Bold, fontSize = 13},GUILayout.ExpandWidth(true));
+            EditorGUILayout.SelectableLabel(new GUIContent("support@aedangraves.info","Need help? No Problem! We're always happy to help with any issue you may have.").text,new GUIStyle(GUI.skin.label){alignment = TextAnchor.MiddleCenter,fontStyle = 
+FontStyle.Bold, fontSize = 13},GUILayout.ExpandWidth(true));
             EditorGUILayout.EndVertical();
             if(GUI.changed){
                 EditorUtility.SetDirty(t);
